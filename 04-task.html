@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 04</title>
+</head>
+
+<body>
+    <script>
+        /*
+        Задание:
+        Напишите сценарий, который выполняет GET запрос по адресу https://jsonplaceholder.typicode.com/todos
+        И выводит содержимое ответа в виде таблицы.
+        */
+        let url = "https://jsonplaceholder.typicode.com/todos";
+        let table = document.createElement("table");
+        table.style.border = "3px solid red";
+
+        fetch(url)
+            .then(response => response.json()) 
+            .then(data => {
+                let thead = document.createElement("thead");
+                let headerRow = document.createElement("tr");
+
+                Object.keys(data[0]).forEach(key => {
+                    let th = document.createElement("th");
+                    th.textContent = key;
+                    th.style.border = "3px solid red";
+                    th.style.padding = "10px";
+                    headerRow.appendChild(th);
+                });
+                thead.appendChild(headerRow);
+                table.appendChild(thead);
+
+                let tbody = document.createElement("tbody");
+                data.forEach(item => {
+                    let row = document.createElement("tr");
+                    Object.values(item).forEach(value => {
+                        let td = document.createElement("td");
+                        td.textContent = value;
+                        td.style.border = "3px solid red";
+                        td.style.padding = "10px";
+                        row.appendChild(td);
+                    });
+                    tbody.appendChild(row);
+                });
+
+                table.appendChild(tbody);
+                document.body.appendChild(table); 
+            })
+            .catch(error => console.log("Произошла ошибка: ", error)); 
+    </script>
+</body>
+
+</html>
