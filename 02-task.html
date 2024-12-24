@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 02</title>
+    <style>
+        .form-group {
+            margin: 4px;
+        }
+
+        .form-group label {
+            width: 75px;
+            display: inline-block;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="registrationForm" novalidate>
+        <div class="form-group">
+            <label>Логин</label>
+            <input type="text" name="login" id="login" minlength="4" required>
+            <span class="error-message" id="loginError">Ошибка</span>
+        </div>
+        <div class="form-group">
+            <label>Пароль</label>
+            <input type="password" name="password" id="password" 
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}" required>
+            <span class="error-message" id="passwordError">Ошибка</span>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Зарегистрироваться">
+        </div>
+    </form>
+
+    <script>
+         /*
+        Задание:
+        Добавьте валидацию формы:
+        Поле ввода логина обязательное и должно содержать не менее 4 символов
+        Поле ввода пароля должно содержать строковое значение, состоящие не менее чем из 6 символов букв в нижнем и верхнем 
+        регистре, цифры и спец символа.
+
+        Проверку нужно организовать с помощью встроенной валидации.
+        Регулярное выражение для проверки пароля - (?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{6,}
+        */
+
+        let form = document.getElementById('registrationForm');
+        let loginInput = document.getElementById('login');
+        let passwordInput = document.getElementById('password');
+        let loginError = document.getElementById('loginError');
+        let passwordError = document.getElementById('passwordError');
+
+        form.addEventListener('submit', (event) => {
+            let isValid = true;
+
+            if (!loginInput.checkValidity()) {
+                loginError.style.display = 'block';
+                isValid = false;
+            } else {
+                loginError.style.display = 'none';
+            }
+
+            if (!passwordInput.checkValidity()) {
+                passwordError.style.display = 'block';
+                isValid = false;
+            } else {
+                passwordError.style.display = 'none';
+            }
+
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>
