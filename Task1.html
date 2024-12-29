@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background-image: url("bg.webp");
+        background-size: cover;
+        background-position: center;
+        overflow: hidden;
+      }
+      .enot {
+        position: absolute;
+        width: 100px;
+        height: auto;
+        pointer-events: none;
+        z-index: 1;
+      }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+
+  <body>
+    <img src="enot.jpg" alt="enot" class="enot" />
+
+    <script>
+      $(document).ready(function () {
+        const $enot = $('.enot');
+        const enotWidth = $enot.width();
+        const enotHeight = $enot.height();
+
+        $(document).on('mousemove', function (event) {
+          let x = event.pageX - enotWidth / 2;
+          let y = event.pageY - enotHeight / 2;
+
+          const windowWidth = $(window).width();
+          const windowHeight = $(window).height();
+
+          if (x < 0) x = 0;
+          if (y < 0) y = 0;
+          if (x + enotWidth > windowWidth) x = windowWidth - enotWidth;
+          if (y + enotHeight > windowHeight) y = windowHeight - enotHeight;
+
+          $enot.css({
+            left: x + 'px',
+            top: y + 'px'
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

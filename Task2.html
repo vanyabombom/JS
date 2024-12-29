@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+        }
+
+        .button-container {
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            width: 90%;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .fruit-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            width: 90%;
+        }
+
+        .fruit {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .fruit.highlight {
+            transform: scale(1.2);
+        }
+
+        .red { background-color: red; }
+        .yellow { background-color: yellow; color: black; }
+        .orange { background-color: orange; }
+        .green { background-color: green; }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button style="background-color: red;" data-color="red">Красный</button>
+        <button style="background-color: yellow; color: black;" data-color="yellow">Жёлтый</button>
+        <button style="background-color: orange;" data-color="orange">Оранжевый</button>
+        <button style="background-color: green;" data-color="green">Зелёный</button>
+    </div>
+    <div class="fruit-container">
+        <div class="fruit red" data-color="red">Помидор</div>
+        <div class="fruit red" data-color="red">Гранат</div>
+        <div class="fruit yellow" data-color="yellow">Банан</div>
+        <div class="fruit yellow" data-color="yellow">Драгонфрут</div>
+        <div class="fruit green" data-color="green">Яблоко</div>
+        <div class="fruit green" data-color="green">Груша</div>
+        <div class="fruit orange" data-color="orange">Апельсин</div>
+        <div class="fruit orange" data-color="orange">Мандарин</div>
+
+    </div>
+    <script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', () => {
+                const color = button.getAttribute('data-color');
+                document.querySelectorAll('.fruit').forEach(fruit => {
+                    if (fruit.getAttribute('data-color') === color) {
+                        fruit.classList.toggle('highlight');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
